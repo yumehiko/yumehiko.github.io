@@ -1,0 +1,52 @@
+.title {
+    width: 400px;
+    height: 140px;
+    position: fixed; /* 位置を固定 */
+    top: 0; /* 上端固定 */
+    left: 50%; /* 横方向の中央に */
+    transform: translateX(-50%); /* 左に50%ずらすことで真ん中に配置 */
+    -webkit-transform: translateX(-50%); /* Safari, Chrome */
+    -ms-transform: translateX(-50%); /* IE 9 */
+    z-index: 999; /* 他の要素より前面に表示 */
+    flex-shrink: 0; /* flexboxで縮むことを防ぐ */
+}
+
+.sticks-wrapper {
+    display: flex;
+    justify-content: center;  /* 横方向を中央揃え */
+    gap: -60px;  /* 要素間の隙間を-60pxに */
+}
+
+.stick {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* 左右中央揃え */
+    margin-left: -30px;
+    margin-right: -30px;
+}
+
+.image-item {
+    width: auto;
+    height: auto;
+}
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(247, 247, 247);
+    z-index: 9999; /* 他の要素より前面に */
+  }
+  
+
+#loadingScreen {
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+}
+
+#loadingScreen.fade-out {
+    opacity: 0;
+}
+  
