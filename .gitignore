@@ -1,0 +1,10 @@
+# Configuration files
+.env
+
+# Temporary files
+*.log
+.DS_Store
+
+# IDE settings
+.idea/
+.vscode/
