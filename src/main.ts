@@ -1,27 +1,43 @@
 // ページが読み込まれたら実行
 window.addEventListener("DOMContentLoaded", async () => onContentLoaded());
 
-let sticks: HTMLElement[];
-let stickFactors: number[];
+// Stickオブジェクトを定義
+import { Stick } from "./Stick.js";
+
+// Stickの配列を定義
+const sticks: Stick[] = [];
+
 
 async function onContentLoaded() {
-  initializeStickScroll();
-  window.addEventListener("scroll", () => onScroll(sticks, stickFactors));
+  generateSticks();
+  window.addEventListener("scroll", () => onScroll());
   await displayLoadingScreenUntilImagesLoad();
 }
 
-function initializeStickScroll() {
-  sticks = Array.from(document.querySelectorAll(".stick")) as HTMLElement[];
-  stickFactors = Array.from(sticks, () => Math.random() * (0.9 - 0.6) + 0.6);
+function generateSticks() {
+  const stickWrappers = document.querySelectorAll(".sticks-wrapper");
+
+  stickWrappers.forEach(wrapper => {
+    // その中にあるstickクラスエレメントを全て取得
+    const stickElements = wrapper.querySelectorAll(".stick") as NodeListOf<HTMLElement>;
+
+    stickElements.forEach(stickElement => {
+      // Stickオブジェクトを生成
+      const factor = Math.random() * (0.9 - 0.6) + 0.6;
+      const stick = new Stick(stickElement, factor);
+
+      // 配列に保存
+      sticks.push(stick);
+    });
+  });
 }
 
-function onScroll(sticks: HTMLElement[], stickFactors: number[]) {
+function onScroll() {
   const scrolled = window.scrollY;
   
-  // 各stickのスクロール位置を調整
-  sticks.forEach((stick, index) => {
-    const factor = stickFactors[index];
-    stick.style.transform = `translateY(${scrolled * factor}px)`;
+  // Stick配列にアクセスして、スクロール処理を行う
+  sticks.forEach(stick => {
+    stick.shift(scrolled);
   });
 }
 

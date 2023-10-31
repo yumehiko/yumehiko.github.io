@@ -1,3 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #F7F7F7;
+    overscroll-behavior: none;
+}
+
 .title {
     width: 400px;
     height: 140px;
@@ -11,10 +18,21 @@
     flex-shrink: 0; /* flexboxで縮むことを防ぐ */
 }
 
+.sticks-box {
+    position: relative;
+    overflow: visible;
+    top: -120px;
+}
+
 .sticks-wrapper {
+    position: absolute;
+    top: 0;
+    left: 50%; /* 横方向の中央に */
+    transform: translateX(-50%); /* 左に50%ずらすことで真ん中に配置 */
+    -webkit-transform: translateX(-50%); /* Safari, Chrome */
+    -ms-transform: translateX(-50%); /* IE 9 */
     display: flex;
     justify-content: center;  /* 横方向を中央揃え */
-    gap: -60px;  /* 要素間の隙間を-60pxに */
 }
 
 .stick {
